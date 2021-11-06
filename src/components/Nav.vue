@@ -1,65 +1,77 @@
 <script setup>
-import { defineProps } from "vue";
-//import { ref } from "vue"
+import { defineProps, defineEmits } from "vue";
+import { ref, watch } from "vue"
 import { debounce } from "lodash-es";
-import router from "@/router/index.js"
+
+
+let keywords=ref("");
 
 const props = defineProps({
   items: {
     type: Array,
     required: true,
   },
-  /*
-  ritems: {
-    type: Array,
-    required: true,
-  },*/
   modelValue: {
     type: String,
     default: "",
   },
 });
 
-let routerList = [ "/", "/products", "/aboutus", "/news", "/book", "/contactus" ];
+const emit = defineEmits(["update:model-value", "update:getKyewords"]);
 
-const handleClick=debounce(function(tab) {
-  //console.log(tab.index);
-  //console.log(event);
-  router.push(routerList[tab.index]);
+const handleChange = (value) => {
+  emit("update:model-value", value);
+};
+
+const searchInfo=debounce(function() {
+  console.log(keywords.value);
+  emit("update:getKyewords", keywords.value);
 }, 1000)
 
+watch(keywords, (newValue, oldValue)=>{
+  console.log('new', newValue);
+  searchInfo();
+})
 
 </script>
-
-
 
 <template>
   <el-affix :offset="0">
     <div class="navbar">
-      <!--div class="header">
+      <div class="header">
         <img class="header__logo" src="../img/main-logo.png" />
+      </div>
+      <!--div style="color: red">
+        <br>
+        <input v-model="keywords">{{keywords}}
       </div-->
+      <!--div style="color: white; text-align:right;">Search: <input type="text" class="form-control" v-model="keywords"/>
+        <div class="search-button-box" @click="searchInfo()"><a class="search-button"><img
+                    src="../img/search.png"></a>
+        </div>
+      </div-->
+      <div class="search-input"><input type="text" v-model="keywords" id="search-input-box" autocomplete="off"/>
+        <!--div class="search-button-box" @click="searchInfo()"><a class="search-button"><img
+                    src="../img/search.png"></a>
+        </div-->
+      </div>
       <div class="tab">
         <el-tabs
           type="card"
           :model-value="props.modelValue"
-          @tab-click="handleClick"
+          @update:model-value="handleChange"
         >
           <el-tab-pane
             v-for="item in props.items"
             :key="item"
             :label="item"
             :name="item"
-          >
-          </el-tab-pane>
+          ></el-tab-pane>
         </el-tabs>
       </div> 
     </div>
   </el-affix>
-  <div class="content"><router-view /></div>
 </template>
-
-
 
 <style>
 .navbar {
@@ -70,10 +82,6 @@ const handleClick=debounce(function(tab) {
 }
 .header__logo {
   width: 180px;
-}
-
-.content{
-  
 }
 
 .search-input{
