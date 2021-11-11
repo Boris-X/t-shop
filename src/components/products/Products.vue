@@ -11,16 +11,18 @@
   <router-view />
 </template>
 
-
+ 
 <script setup>
 import { ref } from "vue"
 import router from "@/router/index.js"
 
+let routerList = [ "/products/smallt", "/products/clothesseries", "/products/trousers", "/products/sportseasydry", "/products/underwear" ];
 const tab = ref(1);
+router.push(routerList[0]);
 
 function btnTime(id) {
   tab.value=id;
-  router.push("/products/smallt");
+  router.push(routerList[id - 1]);
 }
 
 </script>
