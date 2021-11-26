@@ -5,14 +5,14 @@
 </template-->
 
 <template>
-  <div class="container"> 
-    <router-view v-slot="{ Component }">
-      <transition :name="transitionName" mode="out-in">
-        <keep-alive>
-            <component :is="Component"/>
-        </keep-alive>
-      </transition>
-    </router-view>
+  <div>
+  <router-view v-slot="{ Component }">
+    <transition :name="transitionName" mode="out-in">
+      <keep-alive>
+          <component :is="Component"/>
+      </keep-alive>
+    </transition>
+  </router-view>
   </div>
 </template>
 
@@ -21,11 +21,13 @@
 import { ref } from "vue"
 import router from "@/router/index.js"
 
+let flag = true;
 const tab = ref(1);
 const route_LEV = {
-  '/products/clothesseries': 0,
+  '/products/underwear': 0,
   '/products/trousers': 1
 }
+router.push("/products/trousers");
 export default {
   name: 'App',
   data () {
@@ -36,7 +38,9 @@ export default {
     }
   },
   watch: {
-    '$route' (to, from) {
+    /*
+    $route(to, from) {
+      console.log("watch");
       let LEVEL = this.LEVEL
       let toDepth = LEVEL[to.path]
       let fromDepth = LEVEL[from.path]
@@ -46,12 +50,41 @@ export default {
         this.transitionName = toDepth < fromDepth ? 'fade-right' : 'fade-left'
       }
     }
+    */
+  },
+  mounted(){
+      // 浏览器兼容   
+      if ((navigator.userAgent.toLowerCase().indexOf("firefox") != -1)) {
+        document.addEventListener("DOMMouseScroll", this.scrollFun, false);
+      } else if (document.addEventListener) {
+        document.addEventListener("mousewheel", this.scrollFun, false);
+      } else if (document.attachEvent) {
+        document.attachEvent("onmousewheel", this.scrollFun);
+      } else {
+        document.onmousewheel = this.scrollFun;
+      }
   },
   methods:{
+    scrollFun() {
+      console.log("scroll");
+      if(flag)
+      {
+        flag = false;       
+        router.push("/products/underwear");
+        this.transitionName = 'slide-left';
+      }else{
+        flag = true;
+        router.push("/products/trousers");
+        this.transitionName = 'slide-right';
+      }
+    },
     btnTime(id){
       tab.value=id;
       router.push("/products/trousers");
-    }
+    },
+    click() {
+     
+   }
   }
   
 }
@@ -67,18 +100,31 @@ export default {
     background-color: #eeeeee;
     height: 400px;
   }
-  .fade-left-enter-active,.fade-right-enter-active{
-    transition: all .08 ease
+  
+  .slide-right-enter-active, .slide-right-leave-active, .slide-left-enter-active, .slide-left-leave-active {
+    will-change: transform;
+    transition: all 500ms;
+    position: absolute;
   }
-  .fade-left-leave-active, .fade-right-leave-active {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+
+  .slide-right-enter {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
   }
-  .fade-left-leave-to, .fade-right-enter{
-    transform: translate3d(-50%, 0, 0);
-    opacity: 0
+
+  .slide-right-leave-active {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
   }
-  .fade-left-enter, .fade-right-leave-to{
-    transform: translate3d(50%, 0, 0);
-    opacity: 0
+
+  .slide-left-enter {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
   }
+
+  .slide-left-leave-active {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
 </style>

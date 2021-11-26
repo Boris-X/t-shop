@@ -25,7 +25,6 @@ watchEffect(() => {
   }
 });
 
-
 </script>
 
 <style lang="scss">

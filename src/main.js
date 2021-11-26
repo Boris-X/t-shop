@@ -6,4 +6,6 @@ import ElementPlus from "element-plus";
 
 import "element-plus/dist/index.css";
 
-createApp(App).use(store).use(router).use(ElementPlus).mount("#app");
+import JsppUI from '@/libs/jspp-ui'
+
+createApp(App).use(store).use(JsppUI).use(router).use(ElementPlus).mount("#app");
