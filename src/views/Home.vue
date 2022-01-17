@@ -48,6 +48,40 @@
         </tr>
       </tbody>
     </table>
+
+    <ul style="list-style: none;">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5
+        <p>是个大容器</p>
+      </li>
+    </ul>
+
+    <ol>
+      <li>刘德华</li>
+      <li>郭富城</li>
+      <li>杰克逊</li>
+      <li>张学友</li>
+      <li>黎明</li>
+    </ol>
+
+    <dl>
+      <dt>小标题</dt>
+      <dd>内容1</dd>
+      <dd>内容2</dd>  
+    </dl>
+    
+    <form>
+      用户名: <input type="text" name="username">     <br>
+      密码： <input type="password" name="pwd">    <br>
+      性别： 男 <input type="radio" name="sex" value="男" checked="checked"> 女  <input type="radio" name="sex"> 人妖
+      <input type="radio" name="sex">     <br>
+      爱好:  吃饭 <input type="checkbox" checked="checked"> 睡觉 <input type="checkbox" checked="checked"> 打豆豆 <input 
+      type="checkbox" >
+    </form>
+
   </div>
 </template>
 
@@ -91,6 +125,10 @@ computed(() => {
 </script>
 
 <style>
+/* * {
+  padding: 0;
+  margin: 0;
+} */
 .test {
   font-size: 16px;
   color: red;
