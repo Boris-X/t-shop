@@ -73,14 +73,27 @@
       <dd>内容2</dd>  
     </dl>
     
-    <form>
-      用户名: <input type="text" name="username">     <br>
-      密码： <input type="password" name="pwd">    <br>
+    <form action="xxx.php" method="get">
+      <label for="name">用户名: </label><input type="text" name="username" id="name">     <br>
+      <label for="password">密码： </label>
+      <input type="password" name="pwd" id="password">    <br>
       性别： 男 <input type="radio" name="sex" value="男" checked="checked"> 女  <input type="radio" name="sex"> 人妖
       <input type="radio" name="sex">     <br>
-      爱好:  吃饭 <input type="checkbox" checked="checked"> 睡觉 <input type="checkbox" checked="checked"> 打豆豆 <input 
-      type="checkbox" >
+      爱好:  吃饭 <input type="checkbox" value="吃饭" checked="checked" name="hobby"> 睡觉 <input type="checkbox" value="睡觉" checked="checked" name="hobby"> 打豆豆 <input 
+      type="checkbox" value="打豆豆" name="hobby"> <br>
+
+      <input type="submit">
+      <input type="reset">
+
     </form>
+
+  <label for="area">籍贯</label>
+  <select id="area">
+    <option >北京</option>
+    <option >山东</option>
+    <option selected="selected">天津</option>
+    <option >火星</option>
+  </select>
 
   </div>
 </template>
