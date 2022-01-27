@@ -7,8 +7,10 @@
     <span>另外一行</span>
     <div class="pic">
       <a href="http://www.baidu.com"
-        ><img src="../assets/img/1.jpg" alt="" title="我是hunter"
+        ><img src="../assets/5322affb9ad6c.png" alt="" title="我是hunter" width="60" height="40"
       /></a>
+      <img src="../assets/cad.static.0bfb6a6d0adf4f3b1c28c0c90248b18b.svg" alt="" title="我是hunter" width="60" height="40"
+      />
     </div>
     <a href="http://www.baidu.com" style="text-decoration: none">网络链接</a>
 
@@ -94,8 +96,17 @@
     <option selected="selected">天津</option>
     <option >火星</option>
   </select>
-
   </div>
+
+  <div class="three">
+    <div class="one">红色</div>
+    <div class="two">蓝色</div>
+    <div id="thr">粉色</div>
+  </div>
+
+  
+
+
 </template>
 
 
@@ -142,6 +153,9 @@ computed(() => {
   padding: 0;
   margin: 0;
 } */
+.home {
+  text-indent: 2em;
+}
 .test {
   font-size: 16px;
   color: red;
@@ -149,5 +163,24 @@ computed(() => {
 }
 .pic {
   text-align: center;
+}
+.three div {
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
+  border: 2px solid black;
+  line-height: 200px;
+  text-align: center;
+  color: black;
+  font-size: 30px;
+} 
+.one {
+  background-color: red;
+}
+.two {
+  background-color: blue;
+}
+#thr {
+  background-color: pink;
 }
 </style>
